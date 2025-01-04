@@ -18,7 +18,7 @@ export default function Home() {
       </div>
       <div className="absolute top-0 left-0 w-1/2 h-full">
         <Image
-          src="/grid-line.png"
+          src="./grid-line.png"
           alt="Next.js Logo"
           layout="fill"
           objectFit="cover"
@@ -27,7 +27,7 @@ export default function Home() {
       <div className="absolute flex flex-col items-center top-[20%] left-[160px] w-[300px] h-auto space-y-4 text-center">
         <div className="relative w-[126px] h-[110px]">
           <Image
-            src="/main-logo.png"
+            src="./main-logo.png"
             alt="Next.js Logo"
             layout="fill"
             objectFit="cover"
