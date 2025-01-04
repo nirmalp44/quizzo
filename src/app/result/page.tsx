@@ -22,16 +22,15 @@ const ResultsPage: React.FC = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 relative">
-            {/* Top circular icon */}
             <div className="flex items-center justify-center w-20 h-20 bg-white shadow-lg rounded-full">
                 {hasIncorrectAnswers ?<Image
-                    src="/close.png"
+                    src="./close.png"
                     alt="Checklist Icon"
                     width={30}
                     height={30}
                     objectFit="contain"
                 />: <Image
-                    src="/correct.png"
+                    src="./correct.png"
                     alt="Checklist Icon"
                     width={30}
                     height={30}
@@ -53,7 +52,7 @@ const ResultsPage: React.FC = () => {
             )}
             <div className="flex flex-row items-center mb-6">
                 <Image
-                    src="/checklist.png"
+                    src="./checklist.png"
                     alt="Checklist Icon"
                     width={50}
                     height={50}
@@ -65,7 +64,7 @@ const ResultsPage: React.FC = () => {
                             Q{q.id} -{" "}
                             {q.isCorrect ? (
                                 <Image
-                                    src="/correct.png"
+                                    src="./correct.png"
                                     alt="Correct Icon"
                                     width={20}
                                     height={20}
@@ -73,7 +72,7 @@ const ResultsPage: React.FC = () => {
                                 />
                             ) : (
                                 <Image
-                                    src="/close.png"
+                                    src="./close.png"
                                     alt="Incorrect Icon"
                                     width={20}
                                     height={20}
