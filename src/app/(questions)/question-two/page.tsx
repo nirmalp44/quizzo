@@ -3,14 +3,32 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import QuestionWrapper from "@/components/question-wrapper";
+import { useDispatch } from "react-redux";
+import { saveAnswer } from "@/state/question/questionSlice";
 
 const QuestionTwo: React.FC = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleAnswerClick = (answer: string) => {
     setSelectedAnswer((prevAnswer) => (prevAnswer === answer ? null : answer));
   };
+
+  const handleContinue = () => {
+    if (selectedAnswer) {
+      dispatch(
+        saveAnswer({
+          id: 2,
+          question: "What is the capital of Japan?",
+          selectedAnswer,
+          correctAnswer: "Tokyo",
+        })
+      );
+      router.push("/question-three");
+    }
+  };
+
 
   return (
     <QuestionWrapper
@@ -20,7 +38,7 @@ const QuestionTwo: React.FC = () => {
       selectedAnswer={selectedAnswer}
       onAnswerClick={handleAnswerClick}
       onBack={() => router.back()}
-      onContinue={() => router.push("/question-three")}
+      onContinue={handleContinue}
     />
   );
 };
