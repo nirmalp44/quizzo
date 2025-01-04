@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-gradient-to-r from-[#7569B2] to-[#FB2E86] p-4 shadow-md">
+        <nav className="bg-gradient-to-r from-white to-[#fd96c2] p-4 shadow-md">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 <Link href="/" className="text-white text-2xl font-bold">Quizzo</Link>
                 <div className="hidden md:flex space-x-6">
