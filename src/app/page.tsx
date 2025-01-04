@@ -10,7 +10,7 @@ export default function Home() {
     <div className="relative h-screen">
       <div className="absolute top-0 right-0 w-1/2 h-full">
         <Image
-          src="/right-hand-with-watch.png"
+          src="./right-hand-with-watch.png"
           alt="Next.js Logo"
           layout="fill"
           objectFit="cover"
