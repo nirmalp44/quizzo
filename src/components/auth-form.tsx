@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { login, userSignUp } from "@/state/auth/authSlice";
+import { RootState } from "@/state/store";
+import { useRouter } from "next/navigation";
 
 interface AuthFormProps {
     title: string;
@@ -19,15 +23,31 @@ const AuthForm: React.FC<AuthFormProps> = ({
     const [email, setEmail] = useState<string>("");
     const [name, setName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const router = useRouter();
+
+    const dispatch = useDispatch();
+    const { isAuthenticated, errorMessage } = useSelector((state: RootState) => state.auth);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push("/question-one");
+        }
+
+    }, [isAuthenticated, router])
 
     const isFormValid = email && password && (isSignUp ? name : true);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Email:", email);
-        console.log("Password:", password);
-        if (isSignUp) {
-            console.log("Name:", name);
+
+        if (isSignUp && isFormValid) {
+            dispatch(userSignUp({ name, email, password }));
+            router.push("/signin");
+
+        } else if (isFormValid && !isSignUp) {
+            dispatch(login({ email, password }));
+
+
         }
     };
 
@@ -76,6 +96,11 @@ const AuthForm: React.FC<AuthFormProps> = ({
                             className="w-full p-3 border border-gray-300 rounded-md mt-2"
                         />
                     </div>
+                    <div className="pt-1">
+                        {errorMessage && (
+                            <span className="text-red-500 text-sm ">{errorMessage}</span>
+                        )}
+                    </div>
                     <button
                         type="submit"
                         className={`w-full bg-[#FB2E86] text-white font-bold py-2 rounded-md hover:bg-[#cf2770] transition ${!isFormValid ? "opacity-50 cursor-not-allowed" : ""
@@ -86,9 +111,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
                     </button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-600">
-                    {actionLink === "/signup" ? "Already have an account? " : "Don’t have an account? "}
+                    {actionLink === "/signup" ? "Don’t have an account? ": "Already have an account? " }
                     <Link href={actionLink} className="text-blue-500 hover:underline">
-                        {actionLink === "/signup" ? "Please Login" : "Sign up"}
+                        {actionLink === "/signup" ? "Sign up":"Please Login" }
                     </Link>
                 </p>
             </div>
